@@ -3,8 +3,10 @@ Table Customer {
   Name varchar
   Email varchar
   Phone varchar
+  Discount_Eligible boolean
   created_at timestamp
 }
+
 Table Booking {
   Booking_ID integer [primary key]
   Customer_ID integer [not null]
@@ -14,13 +16,7 @@ Table Booking {
   Status varchar [note: 'Confirmed, Pending, Cancelled']
   created_at timestamp
 }
-Table OnlineBooking {
-  OnlineBooking_ID integer [primary key]
-  Ticket_ID integer [not null]
-  Transaction_ID varchar
-  BookingPlatform varchar [note: 'Website, Mobile App']
-  Status varchar [note: 'Pending, Confirmed, Cancelled']
-}
+
 Table Ticket {
   Ticket_ID integer [primary key]
   Booking_ID integer [not null]
@@ -38,6 +34,7 @@ Table Seat {
   Is_Wheelchair_Accessible boolean
   Is_Restricted_View boolean
 }
+
 Table Venue {
   Venue_ID integer [primary key]
   Name varchar
@@ -56,5 +53,36 @@ Table Show {
   Type varchar [note: 'Movie, Play, Concert']
 }
 
+Table Payment {
+  Payment_ID integer [primary key]
+  Booking_ID integer [not null]
+  AmountPaid decimal
+  PaymentMethod varchar [note: 'Card, Cash, Online']
+  TransactionID varchar
+  PaymentStatus varchar [note: 'Completed, Pending, Failed']
+}
 
+Table Discount {
+  Discount_ID integer [primary key]
+  Type varchar [note: 'NHS, Military, Local Resident']
+  Percentage decimal
+}
+
+Table OnlineBooking {
+  OnlineBooking_ID integer [primary key]
+  Ticket_ID integer [not null]
+  Transaction_ID varchar
+  BookingPlatform varchar [note: 'Website, Mobile App']
+  Status varchar [note: 'Pending, Confirmed, Cancelled']
+}
+
+
+Ref: Booking.Customer_ID > Customer.Customer_ID // One-to-Many
+Ref: Ticket.Booking_ID > Booking.Booking_ID // One-to-Many
+Ref: Ticket.Seat_ID > Seat.Seat_ID // One-to-One
+Ref: Ticket.Show_ID > Show.Show_ID // One-to-Many
+Ref: Show.Venue_ID > Venue.Venue_ID // One-to-Many
+Ref: Payment.Booking_ID > Booking.Booking_ID // One-to-One
+Ref: OnlineBooking.Ticket_ID > Ticket.Ticket_ID // One-to-One
+Ref: Ticket.Discount_ID > Discount.Discount_ID // One-to-Many
 
