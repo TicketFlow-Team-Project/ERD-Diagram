@@ -5,13 +5,21 @@ Table Customer {
   Phone varchar
   created_at timestamp
 }
-
-Table Order {
-  Order_ID integer [primary key]
-  Customer_ID integer
+Table Booking {
+  Booking_ID integer [primary key]
+  Customer_ID integer [not null]
+  Show_ID integer
   Total_Amount decimal
-  Status varchar
+  Booking_Type varchar [note: 'Single or Group']
+  Status varchar [note: 'Confirmed, Pending, Cancelled']
   created_at timestamp
 }
+Table OnlineBooking {
+  OnlineBooking_ID integer [primary key]
+  Ticket_ID integer [not null]
+  Transaction_ID varchar
+  BookingPlatform varchar [note: 'Website, Mobile App']
+  Status varchar [note: 'Pending, Confirmed, Cancelled']
+}
 
-Ref: Order.Customer_ID > Customer.Customer_ID // many-to-one
+
