@@ -21,5 +21,22 @@ Table OnlineBooking {
   BookingPlatform varchar [note: 'Website, Mobile App']
   Status varchar [note: 'Pending, Confirmed, Cancelled']
 }
+Table Ticket {
+  Ticket_ID integer [primary key]
+  Booking_ID integer [not null]
+  Show_ID integer
+  Seat_ID integer
+  Price decimal
+  Status varchar [note: 'Booked, Available, Cancelled']
+  Discount_ID integer
+}
+
+Table Seat {
+  Seat_ID integer [primary key]
+  Venue_ID integer
+  Seat_Number varchar
+  Is_Wheelchair_Accessible boolean
+  Is_Restricted_View boolean
+}
 
 
