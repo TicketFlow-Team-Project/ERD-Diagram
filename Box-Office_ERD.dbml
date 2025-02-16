@@ -1,0 +1,17 @@
+Table Customer {
+  Customer_ID integer [primary key]
+  Name varchar
+  Email varchar
+  Phone varchar
+  created_at timestamp
+}
+
+Table Order {
+  Order_ID integer [primary key]
+  Customer_ID integer
+  Total_Amount decimal
+  Status varchar
+  created_at timestamp
+}
+
+Ref: Order.Customer_ID > Customer.Customer_ID // many-to-one
