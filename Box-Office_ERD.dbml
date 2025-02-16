@@ -38,5 +38,23 @@ Table Seat {
   Is_Wheelchair_Accessible boolean
   Is_Restricted_View boolean
 }
+Table Venue {
+  Venue_ID integer [primary key]
+  Name varchar
+  Location varchar
+  Capacity integer
+  Seating_Layout text
+}
+
+Table Show {
+  Show_ID integer [primary key]
+  Title varchar
+  DateTime timestamp
+  Venue_ID integer
+  TotalSeats integer
+  AvailableSeats integer
+  Type varchar [note: 'Movie, Play, Concert']
+}
+
 
 
